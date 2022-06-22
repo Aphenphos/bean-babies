@@ -19,8 +19,8 @@ export default function createBeanieDetails(root) {
         color.textContent = beanie.color;
         swingTag.textContent = `Swing Tag ${beanie.swingTagGeneration}`;
         tushTag.textContent = `Tush Tag ${beanie.tushTagGeneration}`;
-        bday.textContent = `Birthday ${beanie.birthday}`;
-        releaseDate.textContent = `Release Date ${beanie.releaseDate}`;
+        bday.textContent = `Birthday :${beanie.birthday}`;
+        releaseDate.textContent = `Release Date :${beanie.releaseDate}`;
     };
 
 }
