@@ -1,1 +1,39 @@
 /* CSS for home page (index.html) */
+.card {
+    max-height: 500px;
+    max-width: 200px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+}
+
+.bean-img {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+#beanbaby-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.bean-title {
+    font-size: 1.5em;
+}
+
+.bean-theme {
+    font-size: 1em;
+}
+
+#detail-pic {
+    max-width: 600px;
+    max-height: 600px;
+}
+
+#bean-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid black;
+}
