@@ -5,11 +5,7 @@ const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 export async function getBeans() {
     const response = await client
         .from('beanie_babies')
-        .select(`
-        id,
-        title,
-        image,
-        theme`);
+        .select(`*`);
 
     return response.data;
 }
@@ -17,7 +13,7 @@ export async function getBeans() {
 export async function getBean(id) {
     const response = await client
         .from('beanie_babies')
-        .select()
+        .select(`*`)
         .match({ id: id })
         .single();
         
