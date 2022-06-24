@@ -5,7 +5,8 @@ const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 export async function getBeans() {
     const response = await client
         .from('beanie_babies')
-        .select(`*`);
+        .select(`*`,
+            { count: 'exact' });
 
     return response.data;
 }
