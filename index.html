@@ -26,10 +26,9 @@
     <main>
         <div id="inputs">
             <form id="filter">
-                <input name="name" type="text">
-                <input name="color" type="text">
+                <input id="title" name="title" type="text" placeholder="Beanie Title">
+                <input id="theme" name="theme" type="text" placeholder="Beanie Theme">
                 <button id="filter-button">Filter</button>
-            </form>
             <select name="release-year">
                 <option value="">Any year</option>
                 <option value="1993">1993</option>
@@ -61,6 +60,7 @@
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
             </select>
+        </form>
         <section id="paging">
             <select>
                 <option value="10">10</option>

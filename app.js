@@ -2,6 +2,7 @@
 import { getBeans } from './services/bean-service.js';
 import createBeanCard from './components/BeanList.js';
 import createPaging from './components/Paging.js';
+import createFilter from './components/Filter.js';
 
 let title = '';
 let theme = '';
@@ -11,7 +12,6 @@ let beanies = [];
 let page = 1;
 let pageSize = 10;
 let totalPages = 0;
-// write handler functions
 
 async function handlePageLoad() {
     const params = new URLSearchParams(window.location.search);
@@ -47,14 +47,28 @@ function handlePaging(change, pageSize) {
     window.location.search = params.toString();
 }
 
-const BeanList = createBeanCard(document.querySelector('#beanbaby-list'));
+function handleFilter(title, theme, releaseYear) {
+    const params = new URLSearchParams(window.location.search);
+    params.set('title', title);
+    params.set('theme', theme);
+    params.set('releaseYear', releaseYear);
+
+    params.set('page', 1);
+
+    window.location.search = params.toString();
+}
+
+
+const Filter = createFilter(document.querySelector('#filter'), { handleFilter });
 const Paging = createPaging(document.querySelector('#paging'), { handlePaging });
+const BeanList = createBeanCard(document.querySelector('#beanbaby-list'));
 
 
 
 function display() {
-    BeanList({ beanies });
+    Filter({ title, theme, releaseYear });
     Paging({ page, pageSize, totalPages });
+    BeanList({ beanies });
 }
 
 handlePageLoad();

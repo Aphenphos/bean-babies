@@ -36,9 +36,6 @@ export function BeanCard({ beanie }) {
     h2.classList.add('bean-release-year');
     
 
-
-
-
     a.append(img, h1, h2, h3);
     li.append(a);
     return li;
