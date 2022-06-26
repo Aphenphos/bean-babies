@@ -32,8 +32,8 @@ export function BeanCard({ beanie }) {
     h2.classList.add('bean-theme');
 
     const h3 = document.createElement('h3');
-    h2.textContent = beanie.releaseYear;
-    h2.classList.add('bean-release-year');
+    h3.textContent = beanie.releaseYear;
+    h3.classList.add('bean-release-year');
     
 
     a.append(img, h1, h2, h3);

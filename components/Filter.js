@@ -1,6 +1,7 @@
 export default function createFilter(form, { handleFilter }) {
     const titleInput = form.querySelector('#title');
-    const select = form.querySelector('select');
+    const themeInput = form.querySelector('#theme');
+    const releaseYearInput = form.querySelector('#release-year');
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -8,13 +9,15 @@ export default function createFilter(form, { handleFilter }) {
 
         handleFilter(
             formData.get('title'),
+            formData.get('theme'),
             formData.get('releaseYear'),
         );
     });
 
-    return ({ title, releaseYear }) => {
+    return ({ title, theme, releaseYear }) => {
         titleInput.value = title;
-        select.value = releaseYear;
+        themeInput.value = theme;
+        releaseYearInput.value = releaseYear;
   
     };
 }
