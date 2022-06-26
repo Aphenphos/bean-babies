@@ -9,11 +9,11 @@ export async function getBeans(title, theme, releaseYear, { start, end }) {
             { count: 'exact' });
 
     if (title) {
-        query.ilike('title', `%${title}`);
+        query.ilike('title', `%${title}%`);
     }
 
     if (theme) {
-        query.ilike('theme', `%${theme}`);
+        query.ilike('theme', `%${theme}%`);
     }
 
     if (releaseYear) {

@@ -56,6 +56,10 @@ function handleFilter(title, theme, releaseYear) {
     params.set('page', 1);
 
     window.location.search = params.toString();
+
+    //I believe the problem is here somewhere
+    //relating to putting the search params to a string.
+    // I have tested manually creating the URL and it actually does search properly.
 }
 
 
