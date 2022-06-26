@@ -6,7 +6,7 @@ import createFilter from './components/Filter.js';
 
 let title = '';
 let theme = '';
-let releaseYear = '';
+//let releaseYear = '';
 let beanies = [];
 
 let page = 1;
@@ -18,7 +18,7 @@ async function handlePageLoad() {
 
     title = params.get('title') || '';
     theme = params.get('theme') || '';
-    releaseYear = params.get('releaseYear') || '';
+   // releaseYear = params.get('releaseYear') || '';
 
     const pageParam = params.get('page');
     page = pageParam ? Number(pageParam) : 1;
@@ -28,7 +28,7 @@ async function handlePageLoad() {
     const start = (page - 1) * pageSize;
     const end = (page * pageSize) - 1;
 
-    const { data, count } = await getBeans(title, theme, releaseYear, { start, end });
+    const { data, count } = await getBeans(title, theme, /*releaseYear,*/ { start, end });
 
     beanies = data;
 
@@ -47,11 +47,11 @@ function handlePaging(change, pageSize) {
     window.location.search = params.toString();
 }
 
-function handleFilter(title, theme, releaseYear) {
+function handleFilter(title, theme, /*releaseYear*/) {
     const params = new URLSearchParams(window.location.search);
     params.set('title', title);
     params.set('theme', theme);
-    params.set('releaseYear', releaseYear);
+    //params.set('releaseYear', releaseYear);
 
     params.set('page', 1);
 
@@ -66,7 +66,7 @@ const BeanList = createBeanCard(document.querySelector('#beanbaby-list'));
 
 
 function display() {
-    Filter({ title, theme, releaseYear });
+    Filter({ title, theme, /*releaseYear*/ });
     Paging({ page, pageSize, totalPages });
     BeanList({ beanies });
 }

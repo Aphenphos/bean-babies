@@ -1,6 +1,5 @@
 export default function createFilter(form, { handleFilter }) {
     const titleInput = form.querySelector('#title');
-    const themeInput = form.querySelector('#theme');
     const select = form.querySelector('select');
 
     form.addEventListener('submit', (e) => {
@@ -9,14 +8,12 @@ export default function createFilter(form, { handleFilter }) {
 
         handleFilter(
             formData.get('title'),
-            formData.get('theme'),
             formData.get('releaseYear'),
         );
     });
 
-    return ({ title, theme, releaseYear }) => {
+    return ({ title, releaseYear }) => {
         titleInput.value = title;
-        themeInput.value = theme;
         select.value = releaseYear;
   
     };
