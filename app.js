@@ -1,26 +1,78 @@
 // import services and utilities
 import { getBeans } from './services/bean-service.js';
-// import component creators
 import createBeanCard from './components/BeanList.js';
-// declare state variables
+import createPaging from './components/Paging.js';
+import createFilter from './components/Filter.js';
+
+let title = '';
+let theme = '';
+let releaseYear = 0;
 let beanies = [];
-// write handler functions
+
+let page = 1;
+let pageSize = 10;
+let totalPages = 0;
 
 async function handlePageLoad() {
-    beanies = await getBeans();
+    const params = new URLSearchParams(window.location.search);
+
+    title = params.get('title') || '';
+    theme = params.get('theme') || '';
+    releaseYear = params.get('releaseYear') || 0;
+
+    const pageParam = params.get('page');
+    page = pageParam ? Number(pageParam) : 1;
+    const pageSizeParam = params.get('pageSize');
+    pageSize = pageSizeParam ? Number(pageSizeParam) : 10;
+
+    const start = (page - 1) * pageSize;
+    const end = (page * pageSize) - 1;
+
+    const { data, count } = await getBeans(title, theme, releaseYear, { start, end });
+
+    beanies = data;
+
+    totalPages = Math.ceil(count / pageSize);
+
+
     display();
 }
 
-// Create each component: 
-// - pass in the root element via querySelector
-const BeanList = createBeanCard(document.querySelector('#beanbaby-list'));
-// - pass any needed handler functions as properties of an actions object 
+function handlePaging(change, pageSize) {
+    const params = new URLSearchParams(window.location.search);
 
-// Roll-up display function that renders (calls with state) each component
-function display() {
-    BeanList({ beanies });
-    // Call each component passing in props that are the pieces of state this component needs
+    page = Math.max(1, page + change);
+    params.set('page', page);
+    params.set('pageSize', Number(pageSize));
+    window.location.search = params.toString();
 }
 
-// Call display on page load
+function handleFilter(title, theme, releaseYear) {
+    const params = new URLSearchParams(window.location.search);
+    params.set('title', title);
+    params.set('theme', theme);
+    params.set('releaseYear', releaseYear);
+
+    params.set('page', 1);
+
+    window.location.search = params.toString();
+
+    //I believe the problem is here somewhere
+    //relating to putting the search params to a string.
+    // I have tested manually creating the URL and it actually does search properly.
+}
+
+
+const Filter = createFilter(document.querySelector('#filter'), { handleFilter });
+const Paging = createPaging(document.querySelector('#paging'), { handlePaging });
+const BeanList = createBeanCard(document.querySelector('#beanbaby-list'));
+
+
+
+function display() {
+    Filter({ title, theme, releaseYear });
+    Paging({ page, pageSize, totalPages });
+    BeanList({ beanies });
+}
+
 handlePageLoad();
